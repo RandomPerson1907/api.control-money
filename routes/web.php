@@ -11,14 +11,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('register', "UserController@register");
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
     $router->group(['prefix' => 'v1'], function () use ($router) {
-        $router->group(['prefix' => 'incomes'], function () use ($router) {
-            $router->get('/', "IncomeController@index");
+        $router->group(['prefix' => 'tickets'], function () use ($router) {
+            $router->get('/', "TicketController@index");
         });
     });
 });

@@ -2,42 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
-/**
- * @group Income management
- *
- * APIs for managing incomes
- */
-class IncomeController extends Controller
+class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @bodyParam title string required The title of the post.
-     * @bodyParam body string required The title of the post.
-     * @bodyParam type string The type of post to create. Defaults to 'textophonious'.
-     * @bodyParam author_id int the ID of the author
-     * @bodyParam thumbnail image This is required if the post type is 'imagelicious'.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $incomes = [];
-
-        $faker = Factory::create();
-        for ($i = 0; $i < 100; $i++) {
-            $income = new \stdClass();
-            $income->id = $i;
-            $income->name = $faker->name;
-            $income->summ = $faker->numberBetween($min = 1000, $max = 9000);
-
-            $incomes[] = $income;
-        }
-
-        return response()->json($incomes);
+        return response([
+            "test" => false
+        ]);
     }
 
     /**
