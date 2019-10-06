@@ -27,6 +27,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->post('/', "GroupController@store");
             $router->patch('/{id}', "GroupController@update");
             $router->delete('/{id}', "GroupController@delete");
+            $router->delete('/', "GroupController@deleteMany");
         });
 
         $router->group(['prefix' => 'invoices', 'middleware' => 'auth'], function () use ($router) {

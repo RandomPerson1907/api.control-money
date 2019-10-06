@@ -34,6 +34,36 @@ class GroupController extends Controller
 
     public function delete(Request $request, $id)
     {
-        return Event::dispatch(new DeleteGroupEvent($request->apiToken, $id));
+        return Event::dispatch(new DeleteGroupEvent($request->apiToken, array_merge($request->all(), ["id" => $id])));
+    }
+
+    public function deleteMany(Request $request)
+    {
+        if (isset($request->groups)) {
+            $status = true;
+            $messages = [];
+
+            foreach ($request->groups as $id) {
+                $result = Event::dispatch(new DeleteGroupEvent($request->apiToken, array_merge($request->all(), ["id" => $id])))[0];
+
+                if (!$result["status"]) {
+                    $messages[] = $result["message"];
+                    $status = false;
+                }
+            }
+
+            if (empty($messages))
+                $messages[] = "Groups have been deleted successfully";
+
+            return [
+                "status" => $status,
+                "messages" => $messages
+            ];
+        }
+
+        return [
+            "status" => false,
+            "message" => "Groups hasn`t been selected"
+        ];
     }
 }
