@@ -18,11 +18,19 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->group(['prefix' => 'users'], function () use ($router) {
             $router->post('register', "UserController@register");
             $router->post('login', "UserController@login");
-            $router->get('logout', "UserController@logout");
+            $router->post('logout', "UserController@logout");
+        });
+
+        $router->group(['prefix' => 'groups', 'middleware' => 'auth'], function () use ($router) {
+            $router->get('/', "GroupController@list");
+            $router->get('/{id}', "GroupController@one");
+            $router->post('/', "GroupController@store");
+            $router->patch('/{id}', "GroupController@update");
+            $router->delete('/{id}', "GroupController@delete");
         });
 
         $router->group(['prefix' => 'invoices', 'middleware' => 'auth'], function () use ($router) {
-            $router->get('/', "InvoiceController@index");
+            $router->get('/', "InvoiceController@list");
         });
     });
 });

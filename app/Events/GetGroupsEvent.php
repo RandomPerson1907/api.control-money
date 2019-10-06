@@ -2,16 +2,14 @@
 
 namespace App\Events;
 
-use App\Models\User;
-
-class GetInvoicesEvent extends Event
+class GetGroupsEvent extends Event
 {
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($apiToken)
+    public function __construct($apiToken, $limit = 10, $offset = 0, $orderBy = "id", $orderDir = "ASC")
     {
         parent::__construct($apiToken);
     }

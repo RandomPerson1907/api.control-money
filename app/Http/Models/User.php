@@ -28,6 +28,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
+        "apiToken",
+        "remember_token",
+        "created_at",
+        "updated_at",
     ];
 
     public static function getByToken($apiToken)
@@ -41,5 +45,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function deleteApiToken()
     {
         $this->apiToken = null;
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class, "userId", "id");
+    }
+
+    public function group($groupId)
+    {
+        return self::groups()->where("id", "=", $groupId)->firstOrFail();
     }
 }
