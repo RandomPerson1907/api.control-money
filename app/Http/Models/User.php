@@ -56,4 +56,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return self::groups()->where("id", "=", $groupId)->firstOrFail();
     }
+
+    public function invoices()
+    {
+        return $this->hasManyThrough(Invoice::class, Group::class, "userId", "groupId");
+    }
 }

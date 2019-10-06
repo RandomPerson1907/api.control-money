@@ -42,12 +42,14 @@ class GroupController extends Controller
         if (isset($request->groups)) {
             $status = true;
             $messages = [];
+            $notFoundIds = [];
 
             foreach ($request->groups as $id) {
                 $result = Event::dispatch(new DeleteGroupEvent($request->apiToken, array_merge($request->all(), ["id" => $id])))[0];
 
                 if (!$result["status"]) {
                     $messages[] = $result["message"];
+                    $notFoundIds[] = $id;
                     $status = false;
                 }
             }
@@ -57,7 +59,8 @@ class GroupController extends Controller
 
             return [
                 "status" => $status,
-                "messages" => $messages
+                "messages" => $messages,
+                "notFoundIds" => $notFoundIds
             ];
         }
 

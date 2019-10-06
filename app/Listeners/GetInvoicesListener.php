@@ -3,32 +3,32 @@
 namespace App\Listeners;
 
 use App\Events\GetInvoicesEvent;
-use App\Models\Group;
-use App\Models\Invoice;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Auth;
 
 class GetInvoicesListener
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    const INVOICES_FOUND = "Invoices has been found";
+    const INVOICES_NOT_FOUND = "Invoices hasn`t been found";
 
     /**
      * Handle the event.
      *
-     * @param GetInvoicesEvent $event
-     * @return void
+     * @param  GetInvoicesEvent  $event
+     * @return array
      */
     public function handle(GetInvoicesEvent $event)
     {
-        return Group::where("userId", "=", $event->getUser()->id)->with("invoices")->get();
+        try {
+            $invoices = $event->getUser()->invoices()->get();
+            return [
+                "status" => true,
+                "message" => self::INVOICES_FOUND,
+                "invoices" => $invoices
+            ];
+        } catch (\Exception $e) {
+            return [
+                "status" => false,
+                "message" => self::INVOICES_NOT_FOUND
+            ];
+        }
     }
 }

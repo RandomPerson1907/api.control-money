@@ -36,5 +36,17 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\GetInvoicesEvent' => [
             'App\Listeners\GetInvoicesListener',
         ],
+        'App\Events\GetInvoiceEvent' => [
+            'App\Listeners\GetInvoiceListener',
+        ],
+        'App\Events\StoreInvoiceEvent' => [
+            'App\Listeners\StoreInvoiceListener',
+        ],
+        'App\Events\UpdateInvoiceEvent' => [
+            'App\Listeners\UpdateInvoiceListener',
+        ],
+        'App\Events\DeleteInvoiceEvent' => [
+            'App\Listeners\DeleteInvoiceListener',
+        ],
     ];
 }

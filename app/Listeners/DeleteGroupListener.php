@@ -33,7 +33,7 @@ class DeleteGroupListener
                 ->where("id", "=", $event->getGroupId())
                 ->first();
             if (!$group)
-                throw new \Exception(self::GROUP_NOT_FOUND . " [{$event->getGroupId()}]");
+                throw new \Exception(self::GROUP_NOT_FOUND);
 
             $group->delete();
 

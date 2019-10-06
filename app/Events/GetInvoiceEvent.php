@@ -4,7 +4,7 @@ namespace App\Events;
 
 use App\Traits\InvoiceTrait;
 
-class GetInvoicesEvent extends Event
+class GetInvoiceEvent extends Event
 {
     use InvoiceTrait;
 }
