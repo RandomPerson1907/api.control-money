@@ -24,7 +24,7 @@ class GetInvoicesListener
     /**
      * Handle the event.
      *
-     * @param  GetInvoicesEvent  $event
+     * @param GetInvoicesEvent $event
      * @return void
      */
     public function handle(GetInvoicesEvent $event)

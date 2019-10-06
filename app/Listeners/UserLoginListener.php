@@ -30,7 +30,7 @@ class UserLoginListener
     /**
      * Handle the event.
      *
-     * @param  UserLoginEvent  $event
+     * @param UserLoginEvent $event
      * @return array
      */
     public function handle(UserLoginEvent $event)

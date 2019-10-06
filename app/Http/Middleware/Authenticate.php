@@ -36,7 +36,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!isset($request->apiToken) || !User::where("apiToken", "=", $request->apiToken)) {
+        if (!isset($request->apiToken) || !User::where("apiToken", "=", $request->apiToken)->get()->count()) {
             return response('Unauthorized.', 401);
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserLoginEvent;
+use App\Events\UserLogoutEvent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
@@ -30,5 +31,10 @@ class UserController extends Controller
     public function login(Request $request)
     {
         return Event::dispatch(new UserLoginEvent($request->all()));
+    }
+
+    public function logout(Request $request)
+    {
+        return Event::dispatch(new UserLogoutEvent($request->all()));
     }
 }

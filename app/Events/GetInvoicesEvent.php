@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Models\User;
-use http\Env\Request;
 
 class GetInvoicesEvent extends Event
 {

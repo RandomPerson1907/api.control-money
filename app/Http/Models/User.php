@@ -32,6 +32,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public static function getByToken($apiToken)
     {
-        return self::where("apiToken", "=", $apiToken)->first();
+        if ($apiToken)
+            return self::where("apiToken", "=", $apiToken)->whereNotNull("apiToken")->firstOrFail();
+        else
+            throw new \Exception;
+    }
+
+    public function deleteApiToken()
+    {
+        $this->apiToken = null;
     }
 }
