@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Validator;
 
 class Group extends Model
 {
+    protected $fillable = [
+        "name",
+        "description"
+    ];
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -16,15 +20,15 @@ class Group extends Model
         "userId"
     ];
 
-    public static function isValid($groupParameters, $user)
+    public static function isValid($groupParameters, $user, $exceptId)
     {
         $validator = Validator::make($groupParameters, [
             "name" => [
                 "required",
                 "max:191",
-                function ($attribute, $value, $fail) use ($user) {
-                    if ($user->groups()->where("name", "=", $value)->first()) {
-                        return $fail("Group name must be unique");
+                function ($attribute, $value, $fail) use ($user, $exceptId) {
+                    if ($user->groups()->where("name", "=", $value)->where("id", "!=", $exceptId)->first()) {
+                        return $fail("GroupTrait {$attribute} must be unique");
                     }
                 }
             ],

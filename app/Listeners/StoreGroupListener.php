@@ -30,14 +30,13 @@ class StoreGroupListener
 
             if (!$validation->fails()) {
                 $group = new Group;
-                $group->name = $event->getGroupName();
-                $group->description = $event->getGroupDescription();
+                $group->fill($event->getGroupParameters());
                 $group->user()->associate($event->getUser());
                 $group->save();
 
                 return [
                     "status" => true,
-                    "message" => "Group has been saved successfully",
+                    "message" => "Group {$group->name} has been saved successfully",
                     "group" => $group->setRelations([])
                 ];
             } else

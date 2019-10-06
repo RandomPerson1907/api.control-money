@@ -29,7 +29,7 @@ class GroupController extends Controller
 
     public function update(Request $request, $id)
     {
-        return Event::dispatch(new UpdateGroupEvent($request->apiToken, $id, $request->all()));
+        return Event::dispatch(new UpdateGroupEvent($request->apiToken, array_merge($request->all(), ["id" => $id])));
     }
 
     public function delete(Request $request, $id)

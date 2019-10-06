@@ -7,8 +7,8 @@ use App\Models\User;
 
 class GetGroupListener
 {
-    const GROUP_NOT_FOUND = "Group hasn`t been found";
-    const GROUP_FOUND = "Group has been found";
+    const GROUP_NOT_FOUND = "GroupTrait hasn`t been found";
+    const GROUP_FOUND = "GroupTrait has been found";
 
     /**
      * Create the event listener.
