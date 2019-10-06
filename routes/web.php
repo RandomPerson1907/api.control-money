@@ -11,12 +11,15 @@
 |
 */
 
-$router->get('register', "UserController@register");
-
-$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
+$router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'v1'], function () use ($router) {
-        $router->group(['prefix' => 'tickets'], function () use ($router) {
-            $router->get('/', "TicketController@index");
+        $router->group(['prefix' => 'users'], function () use ($router) {
+            $router->post('register', "UserController@register");
+            $router->post('login', "UserController@login");
+        });
+
+        $router->group(['prefix' => 'tickets', 'middleware' => 'auth'], function () use ($router) {
+            $router->get('/', "InvoiceController@index");
         });
     });
 });

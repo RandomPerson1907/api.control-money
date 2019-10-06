@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -10,14 +11,14 @@ class Authenticate
     /**
      * The authentication guard factory instance.
      *
-     * @var \Illuminate\Contracts\Auth\Factory
+     * @var Auth
      */
     protected $auth;
 
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param Auth $auth
      * @return void
      */
     public function __construct(Auth $auth)
@@ -35,7 +36,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
+        if (!isset($request->apiToken) || !User::where("apiToken", "=", $request->apiToken)) {
             return response('Unauthorized.', 401);
         }
 

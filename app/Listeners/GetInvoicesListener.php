@@ -2,11 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Events\ExampleEvent;
+use App\Events\GetInvoicesEvent;
+use App\Models\Group;
+use App\Models\Invoice;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Auth;
 
-class ExampleListener
+class GetInvoicesListener
 {
     /**
      * Create the event listener.
@@ -21,11 +24,11 @@ class ExampleListener
     /**
      * Handle the event.
      *
-     * @param  ExampleEvent  $event
+     * @param  GetInvoicesEvent  $event
      * @return void
      */
-    public function handle(ExampleEvent $event)
+    public function handle(GetInvoicesEvent $event)
     {
-        //
+        return Group::where("userId", "=", $event->getUser()->id)->with("invoices")->get();
     }
 }
