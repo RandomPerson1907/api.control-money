@@ -42,12 +42,12 @@ class InvoiceController extends Controller
 
     public function deleteMany(Request $request)
     {
-        if (isset($request->groups)) {
+        if (isset($request->invoices)) {
             $status = true;
             $messages = [];
             $notFoundIds = [];
 
-            foreach ($request->groups as $id) {
+            foreach ($request->invoices as $id) {
                 $result = Event::dispatch(new DeleteInvoiceEvent($request->apiToken, array_merge($request->all(), ["id" => $id])))[0];
 
                 if (!$result["status"]) {
@@ -58,7 +58,7 @@ class InvoiceController extends Controller
             }
 
             if (empty($messages))
-                $messages[] = "Groups have been deleted successfully";
+                $messages[] = "Invoices have been deleted successfully";
 
             return [
                 "status" => $status,
@@ -69,7 +69,7 @@ class InvoiceController extends Controller
 
         return [
             "status" => false,
-            "message" => "Groups hasn`t been selected"
+            "message" => "Invoices hasn`t been selected"
         ];
     }
 }

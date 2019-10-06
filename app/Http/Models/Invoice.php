@@ -24,12 +24,7 @@ class Invoice extends Model
         $validator = Validator::make($groupParameters, [
             "name" => [
                 "required",
-                "max:191",
-                function ($attribute, $value, $fail) use ($group, $exceptId) {
-                    if ($group->invoices()->where("name", "=", $value)->where("id", "!=", $exceptId)->first()) {
-                        return $fail("Invoice {$attribute} must be unique in current group");
-                    }
-                }
+                "max:191"
             ],
             "description" => "max:60000",
             "amount" => "numeric",

@@ -12,7 +12,7 @@ class GetInvoiceListener
     /**
      * Handle the event.
      *
-     * @param  GetInvoicesEvent  $event
+     * @param  GetInvoiceEvent  $event
      * @return array
      */
     public function handle(GetInvoiceEvent $event)
