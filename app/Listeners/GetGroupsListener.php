@@ -11,16 +11,6 @@ class GetGroupsListener
     const GROUPS_FOUND = "Groups has been found";
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  GetGroupsEvent  $event
@@ -29,7 +19,7 @@ class GetGroupsListener
     public function handle(GetGroupsEvent $event)
     {
         try {
-            $groups = $event->getUser()->groups()->get();
+            $groups = $event->getUser()->groups()->with("invoices")->get();
             return [
                 "status" => true,
                 "message" => self::GROUPS_FOUND,

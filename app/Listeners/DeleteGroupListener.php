@@ -9,16 +9,6 @@ class DeleteGroupListener
     const GROUP_NOT_FOUND = "Group hasn`t been found";
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  DeleteGroupEvent  $event

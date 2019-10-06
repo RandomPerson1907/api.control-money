@@ -27,6 +27,7 @@ trait InvoiceTrait
             "description" => $this->getInvoiceDescription(),
             "amount" => $this->getInvoiceAmount(),
             "groupId" => $this->getInvoiceGroupId(),
+            "invoicesIds" => $this->getInvoicesIds()
         ];
     }
 
@@ -63,5 +64,10 @@ trait InvoiceTrait
             return $group;
         else
             throw new \Exception("Group hasn`t been found");
+    }
+
+    public function getInvoicesIds()
+    {
+        return (isset($this->invoiceParameters["invoices"])) ? $this->invoiceParameters["invoices"] : [];
     }
 }

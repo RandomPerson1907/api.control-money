@@ -18,7 +18,7 @@ class GetInvoicesListener
     public function handle(GetInvoicesEvent $event)
     {
         try {
-            $invoices = $event->getUser()->invoices()->get();
+            $invoices = $event->getUser()->invoices()->with("group")->get();
             return [
                 "status" => true,
                 "message" => self::INVOICES_FOUND,

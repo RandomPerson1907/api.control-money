@@ -17,7 +17,7 @@ class StoreInvoiceListener
     public function handle(StoreInvoiceEvent $event)
     {
         try {
-            $validation = Invoice::isValid($event->getInvoiceParameters(), $event->getInvoiceGroup());
+            $validation = Invoice::isValid($event->getInvoiceParameters());
 
             if (!$validation->fails()) {
                 $invoice = new Invoice;

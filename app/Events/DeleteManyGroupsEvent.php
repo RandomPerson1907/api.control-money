@@ -4,7 +4,7 @@ namespace App\Events;
 
 use App\Traits\GroupTrait;
 
-class GetGroupEvent extends Event
+class DeleteManyGroupsEvent extends Event
 {
     use GroupTrait;
 }

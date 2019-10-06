@@ -19,7 +19,7 @@ class Invoice extends Model
      */
     protected $hidden = [];
 
-    public static function isValid($groupParameters, $group, $exceptId = false)
+    public static function isValid($groupParameters)
     {
         $validator = Validator::make($groupParameters, [
             "name" => [

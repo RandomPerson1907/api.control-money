@@ -10,16 +10,6 @@ class UpdateGroupListener
     const GROUP_NOT_FOUND = "Group hasn`t been found";
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Handle the event.
      *
      * @param  UpdateGroupEvent  $event
@@ -33,7 +23,7 @@ class UpdateGroupListener
             if (!$group)
                 throw new \Exception(self::GROUP_NOT_FOUND);
 
-            $validation = Group::isValid($event->getGroupParameters(), $event->getUser(), $event->getGroupId());
+            $validation = Group::isValid($event->getGroupParameters());
 
             if (!$validation->fails()) {
                 $group = $event->getUser()->groups()->where("id", "=", $event->getGroupId())->first();

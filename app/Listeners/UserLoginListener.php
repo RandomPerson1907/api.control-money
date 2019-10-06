@@ -18,16 +18,6 @@ class UserLoginListener
     const WRONG_CREDENTIALS = "Wrong credentials";
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Handle the event.
      *
      * @param UserLoginEvent $event

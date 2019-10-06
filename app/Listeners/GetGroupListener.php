@@ -7,18 +7,8 @@ use App\Models\User;
 
 class GetGroupListener
 {
-    const GROUP_NOT_FOUND = "GroupTrait hasn`t been found";
-    const GROUP_FOUND = "GroupTrait has been found";
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    const GROUP_NOT_FOUND = "Group hasn`t been found";
+    const GROUP_FOUND = "Group has been found";
 
     /**
      * Handle the event.
@@ -32,7 +22,7 @@ class GetGroupListener
             return [
               "status" => true,
               "message" => self::GROUP_FOUND,
-              "group" => $event->getUser()->group($event->getGroupId())
+              "group" => $event->getUser()->group($event->getGroupId())->with("invoices")->firstOrFail()
             ];
         } catch (\Exception $e) {
             return [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\DeleteInvoiceEvent;
+use App\Events\DeleteManyInvoicesEvent;
 use App\Events\GetInvoiceEvent;
 use App\Events\GetInvoicesEvent;
 use App\Events\StoreInvoiceEvent;
@@ -42,34 +43,6 @@ class InvoiceController extends Controller
 
     public function deleteMany(Request $request)
     {
-        if (isset($request->invoices)) {
-            $status = true;
-            $messages = [];
-            $notFoundIds = [];
-
-            foreach ($request->invoices as $id) {
-                $result = Event::dispatch(new DeleteInvoiceEvent($request->apiToken, array_merge($request->all(), ["id" => $id])))[0];
-
-                if (!$result["status"]) {
-                    $messages[] = $result["message"];
-                    $notFoundIds[] = $id;
-                    $status = false;
-                }
-            }
-
-            if (empty($messages))
-                $messages[] = "Invoices have been deleted successfully";
-
-            return [
-                "status" => $status,
-                "messages" => $messages,
-                "notFoundIds" => $notFoundIds
-            ];
-        }
-
-        return [
-            "status" => false,
-            "message" => "Invoices hasn`t been selected"
-        ];
+        return Event::dispatch(new DeleteManyInvoicesEvent($request->apiToken, $request->all()));
     }
 }

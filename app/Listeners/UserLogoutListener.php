@@ -11,16 +11,6 @@ class UserLogoutListener
     const USER_NOT_FOUND = "User not found";
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  UserLogout  $event

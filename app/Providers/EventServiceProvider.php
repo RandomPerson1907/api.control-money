@@ -33,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\DeleteGroupEvent' => [
             'App\Listeners\DeleteGroupListener',
         ],
+        'App\Events\DeleteManyGroupsEvent' => [
+            'App\Listeners\DeleteManyGroupsListener',
+        ],
         'App\Events\GetInvoicesEvent' => [
             'App\Listeners\GetInvoicesListener',
         ],
@@ -47,6 +50,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\DeleteInvoiceEvent' => [
             'App\Listeners\DeleteInvoiceListener',
+        ],
+        'App\Events\DeleteManyInvoicesEvent' => [
+            'App\Listeners\DeleteManyInvoicesListener',
         ],
     ];
 }

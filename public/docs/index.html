@@ -76,31 +76,167 @@ print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST /api/v1/users/login</code></p>
 <!-- END_ab10e1c11b203a254fc25c51c2d30f65 -->
-<!-- START_6825494b026bcabed5e271b8ed2cf435 -->
+<!-- START_13a195ed380ca3be0a53c21d896d7f01 -->
 <h2>/api/v1/users/logout</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
-$response = $client-&gt;get("/api/v1/users/logout", [
+$response = $client-&gt;post("/api/v1/users/logout", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/v1/users/logout</code></p>
+<!-- END_13a195ed380ca3be0a53c21d896d7f01 -->
+<!-- START_6c5e0bab28b9a0da78549ac6c574a1f4 -->
+<h2>/api/v1/groups</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get("/api/v1/groups", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "title" =&gt; "est",
+            "body" =&gt; "id",
+            "type" =&gt; "omnis",
+            "author_id" =&gt; "4",
+            "thumbnail" =&gt; "enim",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (500):</p>
 </blockquote>
-<pre><code class="language-json">[
-    {
-        "status": false,
-        "message": "User not found"
-    }
-]</code></pre>
+<pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET /api/v1/users/logout</code></p>
-<!-- END_6825494b026bcabed5e271b8ed2cf435 -->
+<p><code>GET /api/v1/groups</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>required</td>
+<td>The title of the post.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>string</td>
+<td>required</td>
+<td>The title of the post.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>optional</td>
+<td>The type of post to create. Defaults to 'textophonious'.</td>
+</tr>
+<tr>
+<td>author_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>the ID of the author</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td>image</td>
+<td>optional</td>
+<td>This is required if the post type is 'imagelicious'.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_6c5e0bab28b9a0da78549ac6c574a1f4 -->
+<!-- START_3ca26d95589ea34edab8e87c3bdd9766 -->
+<h2>/api/v1/groups/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get("/api/v1/groups/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/v1/groups/{id}</code></p>
+<!-- END_3ca26d95589ea34edab8e87c3bdd9766 -->
+<!-- START_e22d6fda00db6aa77cba8ef686d2e292 -->
+<h2>/api/v1/groups</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post("/api/v1/groups", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/v1/groups</code></p>
+<!-- END_e22d6fda00db6aa77cba8ef686d2e292 -->
+<!-- START_02d4f4c207120ff1b310c4d4f21009ab -->
+<h2>/api/v1/groups/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;patch("/api/v1/groups/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PATCH /api/v1/groups/{id}</code></p>
+<!-- END_02d4f4c207120ff1b310c4d4f21009ab -->
+<!-- START_d438934b201bda7e4a84a6ce0b799db3 -->
+<h2>/api/v1/groups/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete("/api/v1/groups/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/v1/groups/{id}</code></p>
+<!-- END_d438934b201bda7e4a84a6ce0b799db3 -->
+<!-- START_2cc33f55f1c4180ce6879ebb14b15841 -->
+<h2>/api/v1/groups</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete("/api/v1/groups", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/v1/groups</code></p>
+<!-- END_2cc33f55f1c4180ce6879ebb14b15841 -->
 <!-- START_b18e8be657a92f7f58d809e8c613119e -->
-<h2>Display a listing of the resource.</h2>
+<h2>/api/v1/invoices</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -117,6 +253,80 @@ print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET /api/v1/invoices</code></p>
 <!-- END_b18e8be657a92f7f58d809e8c613119e -->
+<!-- START_98ffcd325ce048a067aa96f2dc16c14e -->
+<h2>/api/v1/invoices/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get("/api/v1/invoices/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/v1/invoices/{id}</code></p>
+<!-- END_98ffcd325ce048a067aa96f2dc16c14e -->
+<!-- START_52dc66c04ac6e785b1efe058cc863394 -->
+<h2>/api/v1/invoices</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post("/api/v1/invoices", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/v1/invoices</code></p>
+<!-- END_52dc66c04ac6e785b1efe058cc863394 -->
+<!-- START_c9c944a2d018ecd4e6867eeaf3507ba0 -->
+<h2>/api/v1/invoices/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;patch("/api/v1/invoices/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PATCH /api/v1/invoices/{id}</code></p>
+<!-- END_c9c944a2d018ecd4e6867eeaf3507ba0 -->
+<!-- START_db272abab49e84f79f8f4811317cc3d0 -->
+<h2>/api/v1/invoices/{id}</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete("/api/v1/invoices/1", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/v1/invoices/{id}</code></p>
+<!-- END_db272abab49e84f79f8f4811317cc3d0 -->
+<!-- START_67c117e57cb106d1c15a83628c1e286a -->
+<h2>/api/v1/invoices</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete("/api/v1/invoices", [
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/v1/invoices</code></p>
+<!-- END_67c117e57cb106d1c15a83628c1e286a -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

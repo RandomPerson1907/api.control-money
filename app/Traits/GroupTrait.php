@@ -7,6 +7,7 @@ namespace App\Traits;
 trait GroupTrait
 {
     private $groupParameters;
+    private $groups;
 
     /**
      * Create a new event instance.
@@ -25,6 +26,7 @@ trait GroupTrait
         return [
             "name" => $this->getGroupName(),
             "description" => $this->getGroupDescription(),
+            "groupsIds" => $this->getGroupsIds()
         ];
     }
 
@@ -35,11 +37,16 @@ trait GroupTrait
 
     public function getGroupName()
     {
-        return $this->groupParameters["name"];
+        return (isset($this->groupParameters["name"])) ? $this->groupParameters["name"] : false;
     }
 
     public function getGroupDescription()
     {
         return (isset($this->groupParameters["description"])) ? $this->groupParameters["description"] : "";
+    }
+
+    public function getGroupsIds()
+    {
+        return (isset($this->groupParameters["groups"])) ? $this->groupParameters["groups"] : [];
     }
 }

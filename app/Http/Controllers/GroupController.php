@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\DeleteGroupEvent;
+use App\Events\DeleteManyGroupsEvent;
 use App\Events\GetGroupEvent;
 use App\Events\GetGroupsEvent;
 use App\Events\StoreGroupEvent;
@@ -19,7 +20,7 @@ class GroupController extends Controller
 
     public function one(Request $request, $id)
     {
-        return Event::dispatch(new GetGroupEvent($request->apiToken, $id));
+        return Event::dispatch(new GetGroupEvent($request->apiToken, ["id" => $id]));
     }
 
     public function store(Request $request)
@@ -39,34 +40,6 @@ class GroupController extends Controller
 
     public function deleteMany(Request $request)
     {
-        if (isset($request->groups)) {
-            $status = true;
-            $messages = [];
-            $notFoundIds = [];
-
-            foreach ($request->groups as $id) {
-                $result = Event::dispatch(new DeleteGroupEvent($request->apiToken, array_merge($request->all(), ["id" => $id])))[0];
-
-                if (!$result["status"]) {
-                    $messages[] = $result["message"];
-                    $notFoundIds[] = $id;
-                    $status = false;
-                }
-            }
-
-            if (empty($messages))
-                $messages[] = "Groups have been deleted successfully";
-
-            return [
-                "status" => $status,
-                "messages" => $messages,
-                "notFoundIds" => $notFoundIds
-            ];
-        }
-
-        return [
-            "status" => false,
-            "message" => "Groups hasn`t been selected"
-        ];
+        return Event::dispatch(new DeleteManyGroupsEvent($request->apiToken, $request->all()));
     }
 }
